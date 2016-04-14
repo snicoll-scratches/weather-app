@@ -1,0 +1,14 @@
+= Simple weather app
+
+== Getting started
+
+To use this app, you need to register an http://openweathermap.org/appid[API Key] on the
+http://openweathermap.org/[OpenWeatherApp] service.
+
+Once you have it, the easiest way to get running it to set the following environment
+property:
+
+```
+$ EXPORT APP_WEATHER_API_KEY=<yourkey>
+```
+
