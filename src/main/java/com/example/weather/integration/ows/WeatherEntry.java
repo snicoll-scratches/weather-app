@@ -8,7 +8,7 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
-public class WeatherForecastEntry {
+public class WeatherEntry {
 
 	private LocalDateTime timestamp;
 
@@ -38,7 +38,8 @@ public class WeatherForecastEntry {
 
 	@JsonProperty("main")
 	public void setMain(Map<String, Object> main) {
-		this.temperature = Double.parseDouble(main.get("temp").toString());
+		double kelvinTemp = Double.parseDouble(main.get("temp").toString());
+		this.temperature = kelvinTemp - 273.0;
 	}
 
 	public Integer getWeatherId() {

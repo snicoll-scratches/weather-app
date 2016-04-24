@@ -7,15 +7,15 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 
 public class WeatherForecast {
 
-	private List<WeatherForecastEntry> entries;
+	private List<WeatherEntry> entries;
 
 	@JsonProperty("entries")
-	public List<WeatherForecastEntry> getEntries() {
+	public List<WeatherEntry> getEntries() {
 		return entries;
 	}
 
 	@JsonSetter("list")
-	public void setEntries(List<WeatherForecastEntry> entries) {
+	public void setEntries(List<WeatherEntry> entries) {
 		this.entries = entries;
 	}
 

@@ -14,6 +14,8 @@ import org.springframework.web.util.UriTemplate;
 @Service
 public class WeatherService {
 
+	private static final String WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather?q={city},{country}&APPID={key}";
+
 	private static final String FORECAST_URL = "http://api.openweathermap.org/data/2.5/forecast?q={city},{country}&APPID={key}";
 
 	private final RestTemplate restTemplate;
@@ -25,13 +27,22 @@ public class WeatherService {
 		this.apiKey = properties.getApi().getKey();
 	}
 
+	public Weather getWeather(String country, String city) {
+		URI url = new UriTemplate(WEATHER_URL).expand(city, country, this.apiKey);
+		return invoke(url, Weather.class);
+	}
+
 	public WeatherForecast getWeatherForecast(String country, String city) {
 		URI url = new UriTemplate(FORECAST_URL).expand(city, country, this.apiKey);
+		return invoke(url, WeatherForecast.class);
+	}
+
+	private <T> T invoke(URI url, Class<T> responseType) {
 		RequestEntity<?> request = RequestEntity.get(url)
 				.accept(MediaType.APPLICATION_JSON).build();
 
-		ResponseEntity<WeatherForecast> exchange = this.restTemplate
-				.exchange(request, WeatherForecast.class);
+		ResponseEntity<T> exchange = this.restTemplate
+				.exchange(request, responseType);
 
 		return exchange.getBody();
 	}
