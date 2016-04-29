@@ -16,6 +16,8 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 public class WeatherServiceTest {
 
+	private static final String URL = "http://api.openweathermap.org/data/2.5/";
+
 	private WeatherService weatherService;
 
 	private MockRestServiceServer server;
@@ -31,9 +33,8 @@ public class WeatherServiceTest {
 
 	@Test
 	public void getWeather() {
-		this.server.expect(requestTo("http://api.openweathermap.org/data/2.5/weather?q=barcelona,es&APPID=test-ABC"))
-				.andRespond(withSuccess(new ClassPathResource("weather/weather-barcelona.json"),
-						MediaType.APPLICATION_JSON));
+		this.server.expect(requestTo(URL + "weather?q=barcelona,es&APPID=test-ABC")).andRespond(
+				withSuccess(new ClassPathResource("weather-barcelona.json", getClass()), MediaType.APPLICATION_JSON));
 		Weather forecast = this.weatherService.getWeather("es", "barcelona");
 		assertThat(forecast.getName()).isEqualTo("Barcelona");
 		assertThat(forecast.getTemperature()).isEqualTo(13.7, Offset.offset(0.1));
@@ -44,9 +45,8 @@ public class WeatherServiceTest {
 
 	@Test
 	public void getWeatherForecast() {
-		this.server.expect(requestTo("http://api.openweathermap.org/data/2.5/forecast?q=barcelona,es&APPID=test-ABC"))
-				.andRespond(withSuccess(new ClassPathResource("weather/forecast-barcelona.json"),
-						MediaType.APPLICATION_JSON));
+		this.server.expect(requestTo(URL + "forecast?q=barcelona,es&APPID=test-ABC")).andRespond(
+				withSuccess(new ClassPathResource("forecast-barcelona.json", getClass()), MediaType.APPLICATION_JSON));
 		this.weatherService.getWeatherForecast("es", "barcelona");
 		this.server.verify();
 	}
