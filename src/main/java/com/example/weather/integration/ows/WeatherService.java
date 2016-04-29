@@ -40,10 +40,8 @@ public class WeatherService {
 	private <T> T invoke(URI url, Class<T> responseType) {
 		RequestEntity<?> request = RequestEntity.get(url)
 				.accept(MediaType.APPLICATION_JSON).build();
-
 		ResponseEntity<T> exchange = this.restTemplate
 				.exchange(request, responseType);
-
 		return exchange.getBody();
 	}
 

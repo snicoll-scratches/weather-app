@@ -10,7 +10,7 @@ public class WeatherAppProperties {
 	private final Api api = new Api();
 
 	public Api getApi() {
-		return api;
+		return this.api;
 	}
 
 	public static class Api {
@@ -22,7 +22,7 @@ public class WeatherAppProperties {
 		private String key;
 
 		public String getKey() {
-			return key;
+			return this.key;
 		}
 
 		public void setKey(String key) {

@@ -29,7 +29,7 @@ public class WeatherEntry {
 	}
 
 	public double getTemperature() {
-		return temperature;
+		return this.temperature;
 	}
 
 	public void setTemperature(double temperature) {
@@ -43,7 +43,7 @@ public class WeatherEntry {
 	}
 
 	public Integer getWeatherId() {
-		return weatherId;
+		return this.weatherId;
 	}
 
 	public void setWeatherId(Integer weatherId) {
@@ -51,7 +51,7 @@ public class WeatherEntry {
 	}
 
 	public String getWeatherIcon() {
-		return weatherIcon;
+		return this.weatherIcon;
 	}
 
 	public void setWeatherIcon(String weatherIcon) {

@@ -10,13 +10,13 @@ import org.springframework.web.client.RestTemplate;
 @EnableConfigurationProperties(WeatherAppProperties.class)
 public class WeatherApp {
 
-	public static void main(String[] args) {
-		SpringApplication.run(WeatherApp.class, args);
-	}
-
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run(WeatherApp.class, args);
 	}
 
 }

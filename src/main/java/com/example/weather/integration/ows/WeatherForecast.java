@@ -11,7 +11,7 @@ public class WeatherForecast {
 
 	@JsonProperty("entries")
 	public List<WeatherEntry> getEntries() {
-		return entries;
+		return this.entries;
 	}
 
 	@JsonSetter("list")
