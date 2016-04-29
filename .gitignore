@@ -9,3 +9,4 @@ target
 .project
 .settings
 src/main/resources/application-secrets.properties
+.DS_Store
