@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #195fbe;
+        }
+
+        h1 {
+            margin: 50px;
+            font-family: sans-serif;
+            font-size: 60px;
+            display: block;
+            float: left;
+            color: white;
+        }
+
+        canvas {
+            display: block;
+            position: fixed;
+            bottom: 0;
+            right: 30px;
+        }
+    </style>
+</head>
+<h1>404 - Not Found</h1>
+<canvas id="canvas"></canvas>
+<script type="text/javascript">
+    var canvas = document.getElementById('canvas'),
+            context = canvas.getContext('2d'),
+            img = new Image(),
+            w,
+            h,
+            offset,
+            glitchInterval;
+
+    img.src = '/error/404.gif';
+    img.onload = function () {
+        init();
+        window.onresize = init;
+    };
+
+    var init = function () {
+        clearInterval(glitchInterval);
+        canvas.width = w = 750;
+        offset = 0;
+        canvas.height = h = 320;
+        glitchInterval = setInterval(function () {
+            clear();
+            context.drawImage(img, 0, 0, img.width, 320, offset, 0, w
+                    - (offset * 2), h);
+            setTimeout(glitchImg, randInt(250, 1000));
+        }, 500);
+    };
+
+    var clear = function () {
+        context.rect(0, 0, w, h);
+        context.fillStyle = "#195fbe";
+        context.fill();
+    };
+
+    var glitchImg = function () {
+        for (var i = 0; i < randInt(1, 13); i++) {
+            var x = Math.random() * w;
+            var y = Math.random() * h;
+            var spliceWidth = w - x;
+            var spliceHeight = randInt(5, h / 3);
+            context.drawImage(canvas, 0, y, spliceWidth, spliceHeight, x, y,
+                    spliceWidth, spliceHeight);
+            context.drawImage(canvas, spliceWidth, y, x, spliceHeight, 0, y, x,
+                    spliceHeight);
+        }
+    };
+
+    var randInt = function (a, b) {
+        return ~~(Math.random() * (b - a) + a);
+    };
+</script>
+</html>
